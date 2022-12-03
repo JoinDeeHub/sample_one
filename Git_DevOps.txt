@@ -27,7 +27,7 @@ SVN
 2. If i want to go to previous versions of a code, then i need to checkout that previous  version from central repo.
 3. It does not have any direct commands.
 
-Git installation on ubuntu
+Git installation on UBUNTU
 sudo apt-get update
 sudo apt-get install -y git
 
