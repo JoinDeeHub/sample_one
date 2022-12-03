@@ -1,0 +1,308 @@
+touch <filename> -used to create file
+touch f1 f2 -  create multiple files
+mkdir <dir name> - used to create directory
+ll - Listing files and directories in long format
+ls - used to check/list files and directories
+ls -l - Listing files and directories in long format
+ls -lt - Listing files and directoriesin long format with time
+ls -lrt - reverse ls -lt
+ls -a - Listing hidden files 
+ls -al - Listing hidden files in long format
+pwd - present working directory
+cd - change directory
+cd .. - come out of directory 1 level
+cd ../.. - come out of directory 2 level
+cd dir1/dir2 - used to go 2 dir forward
+vi filename - Used to edit the file or add content to a file
+esc :wq! - used to save and quit the file
+esc :q! - used to quit the file without saving.
+cat filename - used to display the content of the file on the console
+esc : set number - used to set the number to a file content
+esc : set nonu - used to remove the line numbers	
+Replace a string - used to replace a string
+esc :%s/str1/str2/g
+s - substitute
+g - globally - used to replace a string everywhere in the file
+1. esc : 1 s/str1/str2/g - used to replace str1 to str2 everywhere in the line.
+2. esc : 1,3 s/str1/str2/g - used to change string from 1st to 3rd line
+3. esc : 1 s/str1/str2/1 - used to change str1 to str2 from 1st line & 1st occurence only
+4. esc :/string - It will move to 1st occurence and you keep pressing  "n" to 2nd occurence and so on..
+5. esc dd : delete the whole line in the file	
+6. esc : 3,$ s/str1/str2/g - used to change str1 to str2 from 3rd line to end of the line
+cp(copy) : It is used to copy content of a file from one to another.
+syn : cp sourcefile destinationfile
+If  destination file doesn't exist then i will create and copy it . If it is already exist then it will override the content.
+mv (move) : It is used to rename a file and also here source file will get deleted and move the content to the destination file.
+syn : mv sourcefile destinationfile
+shells: There are 3 types of shell
+1. bashrc
+2. kshell
+3. cshell
+echo : Used to print any statement 
+syn : echo "message"
+wc (word count) : It is used to count the no. of lines, no. of words, no. of characters in afile
+syn : wc filename  
+If you want to print only no. of lines in a file
+syn : wc -l filename
+If you want to print only no. of words in a file
+syn : wc -w filename
+If you want to print only no. of characters in a file
+syn : wc -c filename
+du -sh : Used to fine disk usage of file
+syn : du -sh
+du -sh * : used to find disk usage of particular file
+df -h : used to check the size of a drive
+syn : df -h (disk free)
+Ridirect (>) command : It is uses to write the o/p of one command to a destination file.
+If destinationfile exists It will override the content, if destinationfile doesn't exists it will ceate new file and redirect the o/p
+for eg : echo "stmt" > destinationfile
+Append (>>) : It is uses to write the o/p of one command to a destination file.
+If destinationfile exists It will not overide the content, instend it will just append the o/p to the end of a file.
+for eg : echo "stmt" >> detinationfile
+useradd <username> - used to add user in linux
+groupadd <groupname> - used to add group in linux
+chmod - used to change permissions for files and directories
+r - read - 4
+w - write - 2
+x - execute - 1
+user group others
+rwx  rwx   rwx
+4+2+1 4+2+1 4+2+1
+  7    7     7
+for eg : chmod 777 filename - used to change permissions for file
+for eg : chmod -R 621 directoryname - used to change permissions for directory
+note :  without using binary format also we can assign permissions to files and directories
+for eg : chomod u+rw, g+rx, o+x filename
+         chmod a+rwx filename
+chown - used to change ownership of a files and directories
+for eg : chown newownername filenme
+for eg : chown -R newownername directoryname
+chgrp - used to change groupname for files and directories
+for eg : chgrp newgroupname filename
+for eg : chgrp -R newgroupname directoryname
+rm command - used to delete files and directories
+For files - rm filename 
+for directory - rm -rf directory
+r - recursive f - forcefully 
+To login as root
+1. sudo
+2. sudo bash
+3. su - : if we have password
+4. su root
+
+Grep command : used to search pattern/string in a file.
+syn : grep "pattern" filename - case sensitive
+      grep -i "pattern" filename - case insensitive
+There are many options used with grep command 
+syn : grep [options] pattern filename
+for eg : 
+1. grep -l "pattern" * - Used to display filenames in which pattern is present.
+2. grep -h "pattern" * - Used to display the matched lines, but do not display the filenames.      
+3. grep -n "pattern" * - Used to display the matched lines and their line numbers.
+4. grep -c "pattern" * - Used to count the number of lines that matches a pattern.
+5. grep -v "pattern" * - Used to print all the lines except pattern.
+6. grep "s$" * - used to print all the lines that ends with given pattern letter.
+7. grep "^I" * - used to print all the lines that starts with given pattern letter.
+8. grep -e "pattern1" -e "pattern2" * - Used to search multiple patterns.
+
+Pipe command (|): Pipe command is used to give o/p of one command as input to other command.
+For eg : cat f1 | wc -l
+
+Head and Tail command 
+Head - Used to display the first part of a file, by default it will display first 10 lines in a file.
+syn : head filename
+Tail - used to display the last part of the file, by default it will display last 10 lines in a file.
+syn : tail filename
+For eg :
+1. head -15 filename : Used to display first 15 lines in a file.
+2. tail -2 filename : Used to display last 2 lines in a file.
+3. head -5 filename | tail -1 - used to display 5th line of a file.
+4. head -5 filename | tail -3 - used to display 3 to 5th line in a file.
+Assignment : How to print last 2nd line in a file.
+
+sed command : Sed command is used to replace a string in a file without opening it.
+syn : sed 's/p1/p2/g' filename
+For eg :
+1. sed '1 s/pattern1/pattern2/g' filename - Used to change the pattern in 1 st line without opening file.
+2. sed '3,5 s/pattern1/pattern2/g' filename - Used to change the pattern from 3 to 5th line only in the o/p.
+3. sed '5,$ s/pattern1/pattern2/g' filename - Used to change the pattern from 5th line to end of the line.
+4. sed -i 's/pattern1/pattern2/g' filename - Used to change the pattern/string in the original file without opening it.
+5. sed -n '5p' filename - Used to print 5 th line a file.
+6. sed -n '4,99p' filename - Used to print from 4th to 10th line.
+7. sed -n '5,$p' filename - Used to print from 5th line to end of file. 
+8. sed '5d' filename - Used to delete 5th line in a file.
+9. sed -i '5d' filename -- Used to delete 5th line in original file.
+Note : if you need to change the original file then use -i= insert to a file / modify to a file.
+Note : if you dont use -i it wont affect the original file it will just print the changed output
+
+uname - used to check the os
+uname -a -> used to check all the info about linux
+who/whoami - used to check how many users logged into system
+ps/ps -ef -> used to list all the processes which are running in the system
+ps -ef | grep "process name" - used to check particular process is running or not.
+kill -9 processid - used to kill the paricular process forcefully
+ps -u "username" - It will show all the process sheet running by a paricular user.
+
+Links 
+There are 2 types of links
+1. soft link/ symbolic link
+2. Hard link
+Soft link : It is a shortcut to file, if any modifications done to a actual file it will get reflected in original file.
+and if we delete original file then soft link will not work.
+syn : ln -s filename(fullpath) linkname
+Hard link :It is a shortcut to file, if any modifications done to a actual file it will get reflected in original file.
+and if we delete original file then hard link will work because it points to a inode of a file.
+where inode is a unique identification number which indicates memory address of a file.
+syn : ln filename(fullpath) linkname
+
+Assignment : Explore Bashrc and Bash-profile
+
+Awk command : Used to cut the content of file column wise.
+For eg :
+1. awk -F " " '{print $1}' filename - used to cut 1st column of a file
+2. awk -F " " '{print $2,$3}' filename - used to cut 2nd and 3rd column.
+3. awk -F " " '{print $NF}' filename - used to cut last column of a file.
+4. awk -F " " '{print $NF, $(NF-1)}' filename - used to cut last 2 columns of a file.
+5. awk -F " " '{print $(NF-1)}' filename - used to cut last 2nd column of a file.
+
+Passwordless connection between 2 servers
+Step 1 - create 2 servers 
+step 2 - Run ssh-keygen -t rsa on server1
+step 3 - copy generated pub key from server 1 and paste it into server2's authorized_keys file 
+step 4 - change permission for authorized_keys file in server2 to 700
+step 5 - Run ssh username@server2_publicip to make passwordless connection between 2 servers.
+
+find command : It is used to find the location of files and directories.
+syn : find . -name "filename"
+     . -> indicates current path
+	 i -> case insensitive
+For eg : 
+1. find . -name "*.txt" - It is used to find .txt file locations
+2. find . -type f "filename" - It is used to find only file locations
+3. find . -type d "directory" - It is used to find only directory locations
+4. find . -type f -empty - It is used to find empty files
+5. find . -type d -empty - It is used to find empty directories
+6. find . -empty - It is used to find both empty files and directories
+7. find . -type f -mtime +60 - It is used to find files that are modified 60 days ago
+8. find . -type f -mtime -30 - It is used to find files that are modified within 30 days.
+9. find . -type f -mmin -15 - It is used to list the files which are modified within last 15 mins.
+10. find . -type f -perm 0644 - It is used to find files that has 0644 permission or user with read and write, group with read and others with read permission.
+11. find . -type f ! -empty - It is used to list non-empty files
+12. find . -type f -size +1k - It is used to find files which are more than 1KB
+
+umask : It is used to set default permission.
+Note : It is reverse of chmod
+syn : umask 000 filename
+For eg : chmod 777 filename
+               777 
+              ------
+        umask  000 filename 	
+
+777 - 654 = 123 
+
+To transfer a file from 1 server to another server 
+1 scp 
+syn : scp filename username@server2ip:path
+2 rsync
+syn : rsync -ap filename username@server2ip:path
+
+Diff between scp and rsync
+While copying the files from 1 server to another server, if copying is stopped due to some network issue , once system
+is back online, the scp command will start copying from the begining whereas in case of rsync it will start copying from where it is stopped.
+
+ping : It is used to check whether the server is up and running.
+syn : ping <ipaddress>
+
+tee - It is used to write the o/p of a command to a file as well as it displays content on the console.
+syn : cat f1 | tee log
+
+uptime : It is used to check how long the system is up and running
+syn : uptime
+
+top : It is used to check which process is taking high cpu usage.
+syn : top
+
+tree : It is used to show the tree structure of files and directories.
+syn : tree
+
+wget and curl : These both commands are used to download the data to a server via some supported protocols such as FTP, HTTP, SCP etc
+
+Netstat : It is used to list listening and non listening ports and also gives statistic info about the network.
+syn : netstat 
+for eg :
+netstat -l : It is used to list only listening ports
+netstat -a : It is used to list all ports
+netstat -at : It is used to list all listening non-listening tcp ports
+netstat -lt : It is used to list only listening tcp ports
+netstat -au : It is used to list all listening non-listening udp ports
+netstat -lu : It is used to list only listening udp ports
+netstat -nptl : It is used to check the service ports.
+
+ifconfig : To see the private ip address, netmask, region
+hostname : shows private ip address with info like region
+hostname -i : shows only private ip
+service <processname> restart : Used to restart the process
+service <processname> stop : Used to stop the process
+service <processname> start : Used to start the process
+
+
+______________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+<<< log files:
+	*Everything from kernel events to user actions is logged by Linux, allowing you to see almost any action performed on your servers.
+	*Linux has a special directory for storing logs called /var/log. This directory contains logs from the OS itself, services, 
+	 and various applications running on the system.
+	 /var/log/
+	 
+    /var/log/cron   stores information about scheduled tasks (cron jobs). 
+    Use this data to verify your << cron jobs are running successfully. <<<
+	
+	
+	
+
+<<< Compress & extract the files in linux ?
+
+   Compression:
+	* Syntax: zip {.zip-filename} {filename-to-compress}	
+	zip is a compression and file packaging utility for Unix/Linux. 
+	Each file is stored in single .zip {.zip-filename} file with the extension .zip.	
+	
+	zip mydata.zip mydata.doc
+	   << zip data.zip *.doc
+	ls -l
+
+   Decompressing files :
+   	* Syntax: unzip {.zip file}	
+   	Extract compressed files in a ZIP archive.	
+   	
+   	unzip file.zip
+	    << unzip data.zip resume.doc
+
+	List the contents of an archive/compressed file :
+		gzip -l {.gz file}	List files from a GZIP archive	gzip -l mydata.doc.gz
+		unzip -l {.zip file}	List files from a ZIP archive	unzip -l mydata.zip
+	
+		tar -ztvf {.tar.gz}					 tar -ztvf pics.tar.gz
+		tar -jtvf {.tbz2}	List files from a TAR archive	 tar -jtvf data.tbz2
+
+
+<<< what is inode and process id ?
+    inode - is an index node, its a unique identification number of a file.
+    
+    process id - is a unique identification number of a process.
+
+
+
+
+<<< Create an username  using specific groupid
+
+    sudo useradd -g 1000 unix      1000 should be a known group id
+   
+
+
+
+
+
+
+
+
