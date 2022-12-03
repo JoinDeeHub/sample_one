@@ -1,0 +1,550 @@
+_________________________________________________________________________________________22 Nov 🥰️
+
+SHELL SCRIPTING
+    • Any file where you put series of linux commands that can be called as shell script.
+With logics and conditions.
+    • Shell script has an extention .sh
+    • Shell script is used to automate the manual and repetitive tasks.
+SHELL: Shell interacts as a interface between user and kernel(linux OS)
+Shebang:
+#!/bin/bash---we call it as shebang- which invokes bash shell. If we don’t use this it uses default shell.
+To check the available shells- cat /etc/shells
+To check default shell:   echo $SHELL
+Example:
+    1. Sample.sh
+#!/bin/bash
+Echo  “hi this is devops class”
+Pwd
+ls –al
+date
+df –h
+uname -a
+Give execute permission to a file. Sudo chmod 777 filename
+To run a shell script file  ./sample.sh
+
+Arguments :- some statements or strings or numbers etc which are passed along with the script.
+Example
+ ./sample.sh  shreeni 34 bangalore—3 arguments , separated by space
+How to read arguments inside the shell script?
+$1- 1st argument
+$2- 2nd argument
+$3- 3rd argument
+-
+-
+-
+$n
+Example 2
+arguments.sh
+#!/bin/bash
+echo “hi I am $1”
+echo “I am aged $2”
+echo “I am from $3”
+to run this     ./arguments.sh shreeni 31 Bangalore
+
+Variables
+Are used to assign a value to a keyword.
+Example3
+ Variables.sh
+#!/bin/bash
+   a=  pwd
+   b=  ls –lrt
+   c=  echo “I am shreeni”
+echo $a
+echo $b
+echo $c
+
+_________________________________________________________________________________23 nov 🥰️
+
+Reading the input passed to the script
+
+#!/bin/bash
+echo "enter your name"
+read name
+echo hi $name
+echo "enter your place"
+read place
+echo "i am from $place"
+-------------------------------------------------------------------------------------
+
+Special charecters:
+--------------------------
+--------------------------
+These have special meaning to a shell.They are
+
+$0-->Name of the file itself.
+$#-->The toltal number of arguments passed to the script.
+$*-->All arguments passed to the script.
+$@-->All arguments passed to the script stored in script in array format.
+$$-->Process id of current running process
+$!-->It gives process id of the last command went into background.
+$?--> Status of last executed command. Zero(0)means success and non-zero means failure.
+
+Numerics:
+-----------------
+-----------------
+-eq--> equals
+-gt--> greater than
+-lt--> less than
+-ge--> greater than or equal to
+-le--> less thanor equal to
+-ne--> not equal to
+
+-----------------------------
+
+maths functions
+maths.sh
+#!/bin/bash
+sum= `expr $1 + $2`
+echo "$sum"
+
+Assignment1- Try above script without arguments. read and use for adding.
+Assignment 2- Do all maths expr using read and use method.
+maths1.sh
+#!/bin/bash
+a=`expr $1 + $2`
+b=`expr $1 - $2`
+c=`expr $1 \* $2`
+d=`expr $1 / $1`
+
+echo "$a"
+echo "$b"
+echo "$c"
+echo "$d"
+
+------------------------------------------------
+Conditional statements:
+IF statement:
+_______________________
+if [condition]
+then
+   statement
+fi
+_________________________
+Assignment 3 use only if condition "print biggest of 2 numbers"
+
+
+
+____________________________________________________________________________________________25 nov 🥰️ 
+
+
+if-else statement
+sysntax:
+__________________
+if [condition]
+ then
+  statement1
+else 
+  statement2
+fi
+
+_______________________
+
+if-else -if 
+syntax:
+____________________
+if [condition]
+ then
+  statement1
+elif [condition2]
+then
+  statement2
+elif [condition3]
+then 
+   statement3
+else
+  statement4
+fi
+__________________________
+
+examples:
+
+1.Find the passed number is 5(five) or not 
+
+checknum.sh
+#!/bin/bash
+if [$1 -eq 5 ]; then
+ echo "$1 is five"
+else
+ echo "$1 is not five"
+fi
+__________________________________
+
+bignumber.sh
+#!/bin/bash
+if [ $1 -gt $2 ]; then
+   echo "$1 is big"
+else
+   echo "$2 is big"
+fi
+__________________________________
+
+Restrict the script to pass only 2 numbers as arguments.
+__________________________________________________
+restrict.sh
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+   echo "pass only 2 numbers"
+exit 1
+fi
+
+if [ $1 -gt $2 ]; then
+   echo "$1 is big"
+else
+   echo "$2 is big"
+fi
+_______________________________________________
+Assignment 1 is to find biggest of 3 numbers.
+
+_______________________________________________
+
+Find whether the given name is a file or dir or link
+fdl.sh
+#!/bin/bash
+echo "enter the name"
+read name
+
+if [ -f $name ]; then
+ echo "$name is a file"
+elif [ -d $name ]; then
+ echo "$name is a dir"
+elif [ -L $name ]; then
+ echo "$name is a link"
+else
+ echo "$name does not exist"
+fi
+
+
+
+____________________________________________________________________________________________26 nov 🥰️ 
+
+
+
+WHILE LOOP: It is used to run a set of commands repeatedly until some Condition occurs.
+
+Syntax:
+_________________
+while [ condition ]
+do 
+   statement
+done
+_________________
+
+1.How to print 5 to 1.
+
+5
+4
+3
+2
+1
+whileloop.sh
+#!/bin/bash
+num=$1
+while [ $num -gt 0 ]
+do
+echo "$num"
+num=`expr $num - 1`
+done
+_________________________________________
+
+
+2. Find the factorial of a given number
+
+#!/bin/bash
+
+num=$1 
+fact=1
+
+while [ $num -gt 0 ]
+do
+        fact=`expr $fact \* $num`     
+        num=`expr $num - 1`
+done
+echo "factorial of $1 is $fact"
+____________________________________________
+
+Eg: 4!=4*3*2*1=24     5*4*3*2*1=120
+_____________________________________
+Write a script to print numbers from 1 to 10.
+num=1
+while [ $num -le 10 ]
+do 
+  echo $num
+  num=`expr $num + 1`
+done
+
+#####################################################################################
+Assignment:
+1.Write a script to Find out whether the entered username and password valid or not
+username:admin
+passwrd:secret
+
+2.Write a script to print fibonacci series.  o 1 1 2 3 5 8
+######################################################################################
+
+WHILE READ LINE: It is used to read each line in a file
+
+syntax:
+______________
+while read line
+do 
+   echo $line
+done < file
+_______________
+
+Eg:
+1.Count no of words in each line of a file 
+
+count_words.sh
+______________________________________
+#!/bin/bash
+
+file=$1
+count=1
+while read line
+do
+        words=`echo $line | wc -w`
+        echo "$count:$words"
+        count=`expr $count + 1`
+done < $file
+
+
+
+----->to execute above, run ./count_words.sh file_name          -->(passing file name as an argument)
+_________________________________________________
+
+OR
+
+Let us assume that the given file name is abc, then
+
+#!/bin/bash
+
+file=abc
+count=1
+
+while read line
+do
+   words=`echo $line | wc -w`
+   echo "$count:$words"
+   count=`expr $count + 1`
+done < "$file"
+
+__________________________________________________
+
+2.Write script to print employee names if their age is more than 50 from below data.
+
+name  employee_id  age
+vijay  100         35
+Vinay  101         40
+Raj    102         55
+Rani   103         60
+Ajay   104         28
+
+
+awk '{
+if ('$NF >50')
+        print "Employee whoes age is more than 50",$1;'
+}' employee_records.txt
+
+awk '{
+if ($NF -gt 50)
+        echo $1
+}' employee_records.txt
+
+
+
+
+
+
+____________________________________________________________________________________________27 nov 🥰️ 
+
+
+
+
+
+
+
+FOR LOOP:A for loop is classified as an iteration statement i.e. it is the repetition of a process within a bash script
+
+syntax:
+__________________
+for i in value1 value2 value3 value4
+do
+statement
+done
+__________________
+
+Eg:
+1. Print numbers from 1 to 10
+__________________
+#!/bin/bash
+
+for num in 1 2 3 4 5 6 7 8 9 10
+do
+        echo $num
+done
+_________________
+      OR
+_________________
+#!/bin/bash              
+
+for num in {1..10}
+do
+        echo $num
+done
+_________________
+
+
+2.Print numbers from 1 to 10 incrementing by 2
+__________________
+#!/bin/bash              
+
+for num in {1..10..2}       --- initiate with 1 and increment by 2 and print upto 10  
+do
+        echo $num
+done
+__________________
+
+
+3.Print the fruits names apple, banana, orange and mango.
+____________________
+#!/bin/bash
+for fruit in apple banana mango orange
+do
+        echo $fruit
+done
+_____________________
+
+
+-----------------------------------------------------------------------------
+ls file_name  -- print the file_name if it is present.
+ls -l file_name  -- print the file_name with details if it is present.
+ls /home/ubuntu/directory  -- lists the files and directories of some other directory from the current directory.
+________________________________________________________________________________________________________________
+
+
+
+1.Write a shell script to identify whether the given file exist or not in a given directory.
+--------------------------------------------------------
+#!/bin/bash
+
+ls -l /home/ubuntu/given_dir_name/given_file_name
+
+if [ $? -eq 0 ]; then
+        echo "file exists"
+else
+        echo "file does not exist"
+fi
+__________________________________________________________________________________________________
+2.Write a shell script to retain recent 30 files in a perticular directory and delete other files. 
+-------------------------------------
+#!/bin/bash
+total=`ls -l | wc -l`
+remaining=`expr $total - 30`  
+
+if [ $remaining -gt 0 ]; then
+        ls -rt | head -$remaining | xargs rm -rf
+        echo "Recent 30 files are retained and others files are deleted"
+else
+        echo "there are no more than 30 files"
+fi
+---------------------------------------------
+
+
+
+#CRONTAB:The crontab is a list of commands that you want to run on a regular schedule, 
+and also the name of the command used to manage that list.
+=========
+
+
+*           *            *               *            *
+Min        hours        Date            month       Day of the week
+(0-59 min)  (0-23hrs)  (1-31 days)     (1-12)        (00-06) 00-sunday
+                                                             01-Monday
+                                                             -
+                                                             06-saturday
+
+Commands:
+export VISUAL=vi
+crontab -e   --> to edit the crontab job
+crontab -l   --> to view the crontab jobs
+systemctl status cron
+
+syntax:
+* * * * * /path to script
+
+Examples:
+run at 10am everyday
+00 10 * * * cd /test/d3/dir/shellscript && ./simple.sh
+
+run script at 1 pm every friday
+00 13 * * 05 /script path
+
+run script at 1 pm every monday to friday:
+00 13 * * 01-05 /script path
+
+run script at 8:30pm every tuesday and thursday
+30 20 * * 02,04 /script path
+
+run script at 10pm coming monday to saturday
+00 22 22-27 11 01-06 /script path
+
+run script every 30 min
+*/30 * * * * /script path
+
+run script every  2 min
+*/2 * * * * /script path
+
+run script for every min
+* * * * * /script path
+
+run script every hour
+00 * * * * /script path
+
+run script every day
+00 00 * * * /script path 
+
+run script for every 2 hour
+* */2 * * * /script path
+
+run script for every 2 days
+00 00 */2 * * /script path
+
+run script for every year:
+00 00 01 01 * /script path
+
+
+Note: 
+1) Crontab will always schedule scripts for minutes and will not schedule for seconds.
+2) If you specify all * then script will run every minute.
+* * * * *
+_______________________________________________________________________________________________________________________________________________________________________
+
+<<< METACHARACTERS: 
+
+These are the special characters that are first interpreted by the shell before passing the same to the command. 
+They are also known as shell wildcards. 
+           <https://www.geeksforgeeks.org/quoting-mechanisms-in-linux/#:~:text=Metacharacters%3A%20These%20are%20the%20special,expand%20the%20value%20of%20Variable.
+
+ 
+$ Variable Substitution or expand the value of Variable.
+> used for Output Redirection.
+>> used for Output Redirection to append.
+< Input redirection.
+<< used for input redirection and is also known as here document.
+* Match any number of characters, Substitution wildcard for zero or more characters
+? Match one character, Substitution wildcard for 1 character
+[] Match range of characters, Substitution wildcard for any character between brackets
+`cmd` Replace cmd with the command to execute and will execute that, Substitution wildcard for command execution
+$(cmd) Replace cmd with the command to execute and will execute that, Substitution wildcard for command execution
+| Pipe is a Redirection to send the output of one command/program/process to another command/program/process for further processing.
+; Command separator is used to execute 2 or more commands with one statement.
+|| OR conditional execution of the commands.
+&& AND conditional execution of the commands.
+() Groups the command in to one output stream.
+& executes command in the background and will display the assigned Pid.
+# to comment something.
+$ To expand the value of a variable.
+\ used to escape the interpretation of a character or to prevent that.
+
+____________________________
